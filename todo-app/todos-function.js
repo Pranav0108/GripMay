@@ -41,6 +41,12 @@ const generateTodoDOM=function(todo){
     x.textContent='x'
     noteEl.textContent=todo.text
     chck.setAttribute('type','checkbox')
+    chck.checked=todo.completed
+    chck.addEventListener('change',function(){
+        toggleTodo(todo.id)
+        saveTodos(todos)
+        renderTodos(todos,filters)
+    })
     x.addEventListener('click',function(){
         removeTodo(todo.id)
        // savenotes(notes)
@@ -52,11 +58,19 @@ const generateTodoDOM=function(todo){
  
     return divEl
 }
+const toggleTodo=function(id){
+    const todo=todos.find(function(todo){
+        return todo.id===id
+    })
+    if(todo!=undefined){
+        todo.completed=!todo.completed
+    }
+}
 const generateSummaryDOM=function(incompleteTodo){
     const summary=document.createElement('h2')
     summary.textContent=`you have ${incompleteTodo.length} todos left`
     return summary
-    console.log(incompleteTodo)
+   // console.log(incompleteTodo)
 }
 
 /*

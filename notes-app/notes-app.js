@@ -1,17 +1,22 @@
-const notes=getSavedNote()
-
+let notes=getSavedNote()
 document.querySelector('#create-note').addEventListener('click',function(e){
-    notes.push({
+    const timeStamp=moment().valueOf()
+    const x={
         id:uuidv4(),
         title:'',
-        body:''
-    })
-    localStorage.setItem('notes',JSON.stringify(notes))
-    renderNotes(notes,filters)
+        body:'',
+        createdAt:timeStamp,
+        updatedAt:timeStamp
+    }
+    notes.push(x)
+    saveNotes(notes)
+    //renderNotes(notes,filters)
+    location.assign(`/edit.html#${x.id}`)
 })
 
 const filters={
-    searchText:''
+    searchText:'',
+    sortedBy:'byEdited'
 }
 
 renderNotes(notes,filters)
@@ -20,6 +25,18 @@ document.querySelector("#search").addEventListener('input',function(e){
    filters.searchText=e.target.value
    renderNotes(notes,filters)
 })
+window.addEventListener('storage',function(e){
+    if(e.key==='notes'){
+        notes=JSON.parse(e.newValue)
+        renderNotes(notes,filters)
+    }
+})
+document.querySelector('#filterby').addEventListener('change',function(e){
+    console.log(e.target.value)
+    filters.sortedBy=e.target.value
+    renderNotes(notes,filters)
+})
+
 /* <form id='name-form'> 
             <input type="text" placeholder="first name" name="firstName">
             <button>Submit</button>
@@ -34,9 +51,7 @@ document.querySelector('#fun').addEventListener('change',function(e){
     console.log(e.target.checked)
 })*/
 //dropdown
-document.querySelector('#filterby').addEventListener('change',function(e){
-    console.log(e.target.value)
-})
+
 /*{
     title:'My next trip',
     body:'I would like to go to spain'

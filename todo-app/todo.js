@@ -45,6 +45,8 @@ document.querySelector('#hide').addEventListener('change',function(e){
         const uncompleted=todos.filter(function(todo){
             return !todo.completed
         })
+        if(uncompleted!==undefined){
         renderTodos(uncompleted,filters)
+        }
     }
 })
