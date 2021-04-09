@@ -1,3 +1,4 @@
+'use strict'
 let notes=getSavedNote()
 document.querySelector('#create-note').addEventListener('click',function(e){
     const timeStamp=moment().valueOf()

@@ -1,3 +1,5 @@
+'use strict'
+var data
 const processData=()=>{
     data='123546597'
 }

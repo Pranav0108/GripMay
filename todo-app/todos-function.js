@@ -1,3 +1,4 @@
+'use strict'
 const getSavedTodos=function(){
     const todosJSON=localStorage.getItem('todos')
     if(todosJSON!==null){

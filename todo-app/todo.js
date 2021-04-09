@@ -1,3 +1,4 @@
+'use strict'
 
 let todos=getSavedTodos()
 /*const p=document.querySelectorAll('p')
